@@ -16,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('alipay',function (){
-            $config=config('pay.alipay');
+            $config               = config('pay.alipay');
+            $config['notify_url'] = 'http://requestbin.fullcontact.com/1igui8b1';
+            $config['return_url'] = route('payment.alipay.return');
             if (app()->environment()!=='production'){
                 $config['mode']='dev';
                 $config['log']['level']=Logger::DEBUG;
